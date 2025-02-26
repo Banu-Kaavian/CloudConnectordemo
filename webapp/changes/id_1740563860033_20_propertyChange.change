@@ -1,0 +1,41 @@
+{
+    "fileName": "id_1740563860033_20_propertyChange",
+    "fileType": "change",
+    "changeType": "propertyChange",
+    "moduleName": "",
+    "reference": "ns.cloudconnectordemo",
+    "packageName": "",
+    "content": {
+        "property": "growingThreshold",
+        "newValue": 5
+    },
+    "selector": {
+        "id": "ns.cloudconnectordemo::sap.suite.ui.generic.template.ListReport.view.ListReport::A_BusinessPartner--responsiveTable",
+        "idIsLocal": false,
+        "type": "sap.m.Table"
+    },
+    "layer": "CUSTOMER_BASE",
+    "texts": {},
+    "namespace": "apps/ns.cloudconnectordemo/changes/",
+    "projectId": "",
+    "creation": 1740563860033,
+    "originalLanguage": "",
+    "support": {
+        "generator": "changeUtils: SAPFioriTools",
+        "service": "",
+        "user": "",
+        "sapui5Version": " ",
+        "sourceChangeFileName": "",
+        "compositeCommand": ""
+    },
+    "oDataInformation": {},
+    "dependentSelector": {},
+    "validAppVersions": {
+        "from": "0.0.1",
+        "to": "0.0.1",
+        "creation": "0.0.1"
+    },
+    "jsOnly": false,
+    "variantReference": "",
+    "appDescriptorChange": false
+}
