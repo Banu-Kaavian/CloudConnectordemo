@@ -1,0 +1,9 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:unified="sap.ui.unified" controllerName="ns.uploadfile.controller.View1">
+
+    <VBox id="_IDGenVBox">
+
+        <unified:FileUploader id="fileUploader" change="onFileChange" fileType="txt,docx" width="100%" buttonOnly="false" placeholder="Choose a file (TXT or DOCX)" />
+    
+    </VBox>
+
+</mvc:View>
