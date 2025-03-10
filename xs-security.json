@@ -1,0 +1,30 @@
+{
+  "xsappname": "abap-programs",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "View access"
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin access"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Viewer role",
+      "scope-references": [
+        "$XSAPPNAME.Viewer"
+      ]
+    },
+    {
+      "name": "Admin",
+      "description": "Admin role",
+      "scope-references": [
+        "$XSAPPNAME.Admin"
+      ]
+    }
+  ]
+}

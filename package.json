@@ -1,0 +1,48 @@
+{
+  "name": "abap-programs",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap-cloud-sdk/http-client": "^4.0.1",
+    "@sap-cloud-sdk/odata-v2": "^4.0.1",
+    "@sap-cloud-sdk/resilience": "^4.0.1",
+    "@sap/cds": "^8.8.0",
+    "@sap/xsenv": "^5.4.0",
+    "@sap/xssec": "^4.4.0",
+    "express": "^4",
+    "passport": "^0.5.3"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.9.0",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8.8.0"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "watch-abap_programs": "cds watch --open abap_programs/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-abap-programs": "cds watch --open abap-programs/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "sql": {
+      "native_hana_associations": false
+    },
+    "requires": {
+      "ODataService": {
+        "kind": "odata-v2",
+        "model": "srv/external/metadata",
+        "csrf": true,
+        "csrfBatch": true,
+        "credentials": {
+          "url": "http://3.86.214.196:50000/sap/opu/odata/sap/Z_ABAP_PROGRAM_BINDING/",
+          "username": "KAAV22",
+          "password": "Newpass22"
+        }
+      }
+    }
+  }
+}
