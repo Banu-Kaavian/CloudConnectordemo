@@ -13,13 +13,17 @@
     "@sap/cds": "^8.8.0",
     "@sap/xsenv": "^5.4.0",
     "@sap/xssec": "^4.4.0",
+    "axios": "^1.8.3",
     "express": "^4",
-    "passport": "^0.5.3"
+    "http-proxy-middleware": "^3.0.3",
+    "passport": "^0.5.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.9.0",
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8.8.0"
+    "@sap/cds-dk": "^8.8.0",
+    "ui5-middleware-simpleproxy": "^3.4.0"
   },
   "scripts": {
     "start": "cds-serve",
@@ -34,11 +38,12 @@
     "requires": {
       "ODataService": {
         "kind": "odata-v2",
-        "model": "srv/external/metadata",
+        "model": "smetadata",
+        "service": "smetadata",
         "csrf": true,
         "csrfBatch": true,
         "credentials": {
-          "url": "http://3.86.214.196:50000/sap/opu/odata/sap/Z_ABAP_PROGRAM_BINDING/",
+          "url": "http://44.201.188.132:50000/sap/opu/odata/sap/Z_ABAP_PROGRAM_BINDING/",
           "username": "KAAV22",
           "password": "Newpass22"
         }

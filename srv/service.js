@@ -1,30 +1,29 @@
 const cds = require('@sap/cds');
 
 module.exports = async function (srv) {
-    const ODataService = await cds.connect.to('ODataService'); // Connect to OData V2
+    const ODataService = await cds.connect.to('ODataService');
 
     srv.on('READ', 'Programs', async (req) => {
         try {
-            const results = await ODataService.run(req.query);
+            let allResults = [];
+            let skip = 0;
+            const batchSize = 500; // Fetch in batches
 
-            // Explicitly fetch binary data if needed
-            if (results && Array.isArray(results)) {
-                for (let program of results) {
-                    if (program.ProgramName) {
-                        let binaryData = await ODataService.run(
-                            SELECT.one.from('ODataService.Programs')
-                                .columns('ProgramSourceCode')
-                                .where({ ProgramName: program.ProgramName })
-                        );
-                        console.log(program.ProgramSourceCode);
+            while (true) {
+                const results = await ODataService.run(
+                    SELECT.from('ODataService.Programs')
+                        .columns('ProgramName')
+                        .limit(batchSize, skip)
+                );
 
-                        if (binaryData && binaryData.ProgramSourceCode) {
-                            program.ProgramSourceCode = Buffer.from(binaryData.ProgramSourceCode).toString('base64');
-                        }
-                    }
-                }
+                if (results.length === 0) break;
+
+                allResults.push(...results);
+                skip += batchSize;
             }
-            return results;
+
+            console.log(`Fetched Programs: ${allResults.length}`);
+            return allResults;
         } catch (error) {
             req.reject(500, `Error fetching data: ${error.message}`);
         }
