@@ -5,4 +5,6 @@ service CatalogService {
         key ProgramName, 
         key Author        
     };
+
+    action SourceCode(programName: String) returns String;
 }

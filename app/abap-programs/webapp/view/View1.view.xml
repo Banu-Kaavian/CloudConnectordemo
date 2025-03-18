@@ -14,6 +14,6 @@
         </ComboBox>
 
         <Label id="_IDGenLabel2" text="Selected Program Name"/>
-        <TextArea id="programCode" rows="10" width="100%" editable="false"/>
+        <TextArea id="programCode" rows="15" width="100%" editable="false"/>
     </VBox>
 </mvc:View>

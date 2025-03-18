@@ -16,11 +16,11 @@ server:
             - /test-resources
           url: https://sapui5.hana.ondemand.com
 
-    # - name: ui5-middleware-simpleproxy
-    #   afterMiddleware: compression
-    #   configuration:
-    #     baseUri: "http://44.201.188.132:50000"
-    #     mountPath: "/api"
+    - name: ui5-middleware-simpleproxy
+      afterMiddleware: compression
+      configuration:
+        baseUri: "http://44.201.188.132:50000"
+        mountPath: "/api"
 
     - name: fiori-tools-appreload
       afterMiddleware: compression
