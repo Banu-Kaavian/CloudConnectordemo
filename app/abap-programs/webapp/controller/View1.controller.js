@@ -10,10 +10,10 @@ sap.ui.define([
             this.getView().setModel(new JSONModel(), "sourceModel");
         },
 
-        onProgramSelect: function (oEvent) {
-            var oComboBox = oEvent.getSource();
+        onGetSourceCode: function () {
+            var oComboBox = this.getView().byId("programDropdown");
             var sSelectedProgram = oComboBox.getSelectedKey() || oComboBox.getValue();
-            
+
             sSelectedProgram = sSelectedProgram.trim();
 
             if (sSelectedProgram) {

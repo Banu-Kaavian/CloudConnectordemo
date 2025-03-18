@@ -8,10 +8,11 @@
         <Label id="_IDGenLabel1" text="Select a Program"/>
         <ComboBox id="programDropdown"
             items="{mainmodel>/Programs}"
-            selectionChange=".onProgramSelect"
             editable="true">
             <core:ListItem id="_IDGenListItem" key="{mainmodel>ProgramName}" text="{mainmodel>ProgramName}" />
         </ComboBox>
+
+        <Button id="_IDGenButton" text="Get Source Code" press=".onGetSourceCode" />
 
         <Label id="_IDGenLabel2" text="Selected Program Name"/>
         <TextArea id="programCode" rows="15" width="100%" editable="false"/>
