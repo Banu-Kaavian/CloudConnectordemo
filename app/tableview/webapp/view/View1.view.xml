@@ -1,0 +1,26 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" 
+          xmlns="sap.m"
+          controllerName="ns.tableview.controller.View1">
+    
+    <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+        <HBox id="_IDGenHBox" class="sapUiSmallMargin">
+            <Input id="serviceInput" width="300px" placeholder="Enter Service Name..." />
+            <Button id="_IDGenButton1" text="Preview" press="onPreview" />
+        </HBox>
+
+        <Table id="dataTable" width="100%" growing="true" growingThreshold="10" items="{viewModel>/results}">
+            <columns>
+                <!-- Columns will be added dynamically -->
+            </columns>
+            <items>
+            <ColumnListItem id="_IDGenColumnListItem">
+            <cells>
+                <!-- Cells will be added dynamically -->
+            </cells>
+           </ColumnListItem>
+                <!-- Rows will be added dynamically -->
+            </items>
+        </Table>
+    </VBox>
+
+</mvc:View>
