@@ -2,8 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "sap/ui/core/Fragment"
-], function(Controller, JSONModel, MessageToast, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/m/MessageBox"
+], function(Controller, JSONModel, MessageToast, Fragment, MessageBox) {
     "use strict";
 
     return Controller.extend("ns.tableview.controller.View1", {
@@ -28,70 +29,120 @@ sap.ui.define([
                 console.log("Metadata Response:", response.data);
                 if (response.data.value && response.data.value.length > 0) {
                     var entityName = response.data.value[0].metadata;
+
                     console.log("The service Name:",serviceName,"The Entity Name: ",entityName);
+
                     that.loadEntityData(serviceName, entityName);
                 } 
                 else 
                 {
-                    MessageToast.show("No metadata found for the given service.");
+                    MessageBox.warning("No Service Found \n Please Enter a Valid Service Name");
                 }
             })
             .catch(error => {
                 console.error("Error fetching metadata:", error);
-                MessageToast.show("Error fetching metadata");
+                MessageBox.error("Error fetching metadata");
             });
 
         },
-
+        onColumnChange: function (oEvent) {
+            var sSelectedKey = oEvent.getSource().getSelectedKey();
+        
+            if (!sSelectedKey) {
+                console.log("No column selected.");
+                return;
+            }
+        
+            // Store selected column for filtering
+            this.selectedColumn = sSelectedKey;
+        },
+        
+        
+        onFilterData: function (oEvent) {
+            var sQuery = oEvent.getParameter("value"); // Get user input value
+            var oTable = this.getView().byId("dataTable"); // Get table
+            var oBinding = oTable.getBinding("items"); // Get data binding
+        
+            if (!this.selectedColumn) {
+                MessageBox.warning("Please select a column to filter.");
+                return;
+            }
+        
+            if (sQuery) {
+                var oFilter = new sap.ui.model.Filter(this.selectedColumn, sap.ui.model.FilterOperator.Contains, sQuery);
+                oBinding.filter([oFilter]); // Apply filter
+            } else {
+                oBinding.filter([]); // Reset filter
+            }
+        },
+        
+        // Function to dynamically populate column selection
+        populateFilterColumns: function (data) {
+            var oSelect = this.getView().byId("filterColumnSelect");
+            oSelect.destroyItems(); // Clear previous entries
+        
+            // Add an empty option as the first item
+            oSelect.addItem(new sap.ui.core.Item({
+                key: "",
+                text: "-- Select Column --" // Placeholder text
+            }));
+        
+            // Get keys (column names) from the first data object
+            if (data.length > 0) {
+                var aKeys = Object.keys(data[0]); // Extract column names
+                aKeys.forEach(function (key) {
+                    oSelect.addItem(new sap.ui.core.Item({
+                        key: key,
+                        text: key.toUpperCase() // Display as uppercase
+                    }));
+                });
+            }
+        
+            // Set default selection to the empty option
+            oSelect.setSelectedKey("");
+        },
+        
+        
+        // Modify loadEntityData to call populateFilterColumns
         loadEntityData: function(serviceName, entityName) {
             var that = this;
-        
             axios.get(`/odata/v4/catalog/EntityData?serviceName=${serviceName}&entityName=${entityName}`)
                 .then(response => {
-                    console.log("Full Entity Data Response:", response?.data?.value);
-        
                     if (!Array.isArray(response?.data?.value) || response?.data?.value.length === 0) {
-                        console.warn("Response data is empty or invalid.");
-                        sap.m.MessageToast.show("No data available for this entity.");
+                        MessageBox.information("No data available for this entity.");
                         return;
                     }
         
-                    // Step 1: Transform Data
                     var transformedData = response.data.value.map(item => {
                         let transformedItem = {};
                         Object.keys(item).forEach(key => {
-                            if (key !== "_metadata") {
-                                transformedItem[key] = item[key];
-                            }
+                            if (typeof item[key] === "string" && item[key].startsWith("/Date(")) {
+                                transformedItem[key] = that.convertSAPDate(item[key]);
+                                } else if (key !== "__metadata") {
+                                    transformedItem[key] = item[key];
+                                }
                         });
                         return transformedItem;
                     });
-        
-                    // Step 2: Set model before binding data
                     var oModel = new sap.ui.model.json.JSONModel({ results: transformedData });
-                    var oView = that.getView();
-                    if (!oView) {
-                        console.warn("View is not available. Cannot set model.");
-                        return;
-                    }
-                    oView.setModel(oModel, "viewModel");
-                    
-                    // Step 3: Create table columns & bind data
-                    that.createTableColumns(transformedData);
         
-                    console.log("TransformData", transformedData);
-                    console.log("View Model Data:", this.getView().getModel("viewModel").getData());
-
+                
+                    that.getView().setModel(oModel, "viewModel");
+        
+                    // Populate filter dropdown with columns
+                    that.populateFilterColumns(transformedData);
+        
+                    that.createTableColumns(transformedData);
                     
-                    // Step 4: Refresh UI
-                    oView.getModel("viewModel").refresh();
+                    
+
+                    that.getView().getModel("viewModel").refresh();
                 })
                 .catch(error => {
-                    console.error("Error fetching entity data:", error);
                     sap.m.MessageToast.show("Error fetching entity data.");
+                    console.error("Error fetching entity data:", error);
                 });
         },
-        
         convertSAPDate: function(sapDate) {
             if (!sapDate) return "";
             
@@ -121,9 +172,10 @@ sap.ui.define([
             // Create columns
             aKeys.forEach(function (key) {
                 oTable.addColumn(new sap.m.Column({
-                    header: new sap.m.Text({ text: key })
+                    header: new sap.m.Text({ text: key.toUpperCase() })
                 }));
             });
+            
         
             // Create dynamic row template
             var oTemplate = new sap.m.ColumnListItem({

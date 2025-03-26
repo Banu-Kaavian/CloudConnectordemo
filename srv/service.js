@@ -117,51 +117,5 @@ module.exports = cds.service.impl(async function () {
             return [];
         }
     });
-    
-    // this.on("READ", EntityData, async (req) => {
-    //     try {
-    //         // Extract serviceName and entityName
-    //         let serviceName = req?._.req?.query?.serviceName;
-    //         let entityName = req?._.req?.query?.entityName;
-    
-    //         if (!serviceName || !entityName) {
-    //             console.error("Error: Service name or entity name is missing.");
-    //             return [];
-    //         }
-    
-    //         // console.log("Extracted serviceName:", serviceName);
-    //         // console.log("Extracted entityName:", entityName);
-    
-    //         // Call OData Service
-    //         const response = await axios.get(
-    //             `http://34.238.82.151:50000/sap/opu/odata/sap/${serviceName}/${entityName}/`,
-    //             {
-    //                 headers: { Accept: "application/json, application/xml" }, // Accept both JSON and XML
-    //                 auth,
-    //             }
-    //         );
-    
-    //         let data;
-    
-    //         if (response.headers["content-type"].includes("application/json")) {
-    //             // If JSON format, extract the data
-    //             data = response.data?.d?.results || [];
-    //         } else if (response.headers["content-type"].includes("application/xml")) {
-    //             // If XML format, convert to JSON
-    //             const parser = new xml2js.Parser({ explicitArray: false });
-    //             const jsonData = await parser.parseStringPromise(response.data);
-    //             data = jsonData?.feed?.entry || []; // Adjust based on OData XML structure
-    //         } else {
-    //             console.error("Unexpected response format:", response.headers["content-type"]);
-    //             return [];
-    //         }
-    
-    //         //console.log("Final Entity Data for Table:", JSON.stringify(data, null, 2));
-    //         return data;
-    //     } catch (error) {
-    //         console.error("Error fetching entity data:", error.response?.data || error.message);
-    //         return [];
-    //     }
-    // });
      
 });

@@ -1,26 +1,42 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" 
-          xmlns="sap.m"
-          controllerName="ns.tableview.controller.View1">
-    
-    <VBox id="_IDGenVBox" class="sapUiSmallMargin">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ns.tableview.controller.View1">
+<VBox id="_IDGenVBox" class="sapUiSmallMargin">
         <HBox id="_IDGenHBox" class="sapUiSmallMargin">
             <Input id="serviceInput" width="300px" placeholder="Enter Service Name..." />
             <Button id="_IDGenButton1" text="Preview" press="onPreview" />
         </HBox>
+    <VBox id="_IDGenVBox1" fitContainer="true" >
+     <!-- Filter Section -->
 
+        <HBox id="_IDGenHBox1" visible="true">
+            <Label id="_IDGenLabel" text="Filter by:" />
+
+          <Select id="filterColumnSelect" change="onColumnChange">
+            <!-- Options will be added dynamically -->
+          </Select>
+
+         <Input id="filterInput" placeholder="Enter filter value..." liveChange="onFilterData"/>
+        </HBox>
+
+     <!-- Scrollable Container for Table -->
+     <ScrollContainer id="_IDGenScrollContainer1" width="100%" height="400px" horizontal="false" vertical="true">
         <Table id="dataTable" width="100%" growing="true" growingThreshold="10" items="{viewModel>/results}">
+
             <columns>
-                <!-- Columns will be added dynamically -->
+                <!-- Columns will be dynamically added -->
             </columns>
+
             <items>
-            <ColumnListItem id="_IDGenColumnListItem">
-            <cells>
-                <!-- Cells will be added dynamically -->
-            </cells>
-           </ColumnListItem>
-                <!-- Rows will be added dynamically -->
+                <ColumnListItem id="_IDGenColumnListItem">
+                    <cells>
+                        <!-- Cells will be dynamically added -->
+                    </cells>
+                </ColumnListItem>
             </items>
+
         </Table>
+
+     </ScrollContainer>
     </VBox>
+</VBox>
 
 </mvc:View>
