@@ -1,1 +1,24 @@
-/* Enter your custom styles here */
+/* style.css */
+
+/* Make headers bold */
+.customTable .sapMColumnHeader {
+    font-weight: bold;
+    background-color: #f3f4f5;
+}
+
+/* Zebra striping for rows */
+.customTable .sapMListTblRow:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Add spacing to cells */
+.customTable .sapMText {
+    padding: 0.5rem;
+}
+
+/* Stylish panel */
+.sapMPanelHdr {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0a6ed1;
+}

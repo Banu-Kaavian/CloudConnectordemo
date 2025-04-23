@@ -88,50 +88,28 @@ sap.ui.define([
         // Function to dynamically populate column selection
         populateFilterColumns: function (data) {
             var oSelect = this.getView().byId("filterColumnSelect");
-            oSelect.destroyItems();
+            oSelect.destroyItems(); // Clear previous entries
         
+            // Add an empty option as the first item
+            oSelect.addItem(new sap.ui.core.Item({
+                key: "",
+                text: "-- Select Column --" // Placeholder text
+            }));
+        
+            // Get keys (column names) from the first data object
             if (data.length > 0) {
-                var aKeys = Object.keys(data[0]);
-        
-                aKeys.forEach(function (key, index) {
+                var aKeys = Object.keys(data[0]); // Extract column names
+                aKeys.forEach(function (key) {
                     oSelect.addItem(new sap.ui.core.Item({
                         key: key,
-                        text: key.toUpperCase()
+                        text: key.toUpperCase() // Display as uppercase
                     }));
-        
-                    if (index === 0) {
-                        this.selectedColumn = key;  // Default filter column
-                    }
-                }, this); // note the `this` context
-        
-                oSelect.setSelectedKey(this.selectedColumn);
+                });
             }
+        
+            // Set default selection to the empty option
+            oSelect.setSelectedKey("");
         },
-        
-        // populateFilterColumns: function (data) {
-        //     var oSelect = this.getView().byId("filterColumnSelect");
-        //     oSelect.destroyItems(); // Clear previous entries
-        
-        //     // Add an empty option as the first item
-        //     oSelect.addItem(new sap.ui.core.Item({
-        //         key: "",
-        //         text: "-- Select Column --" // Placeholder text
-        //     }));
-        
-        //     // Get keys (column names) from the first data object
-        //     if (data.length > 0) {
-        //         var aKeys = Object.keys(data[0]); // Extract column names
-        //         aKeys.forEach(function (key) {
-        //             oSelect.addItem(new sap.ui.core.Item({
-        //                 key: key,
-        //                 text: key.toUpperCase() // Display as uppercase
-        //             }));
-        //         });
-        //     }
-        
-        //     // Set default selection to the empty option
-        //     oSelect.setSelectedKey("");
-        // },
         
         
         // Modify loadEntityData to call populateFilterColumns

@@ -7,6 +7,7 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8.8.3",
+    "@sap/xssec": "^4",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
     "express": "^4",
@@ -15,10 +16,23 @@
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.9.0",
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "mbt": "^1.2.29",
+    "rimraf": "^6.0.1"
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-tableview": "cds watch --open tableview/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-tableview": "cds watch --open tableview/webapp/index.html?sap-ui-xx-viewCache=false",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "undeploy": "cf undeploy capm-app --delete-services --delete-service-keys --delete-service-brokers"
+  },
+  "cds": {
+    "requires": {
+      "html5-runtime": true,
+      "destinations": true,
+      "workzone": true
+    }
   }
 }

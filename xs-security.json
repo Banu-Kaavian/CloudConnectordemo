@@ -1,0 +1,17 @@
+{
+  "xsappname": "sap-s4hana-tableview",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "Access tableview data"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "TableViewViewer",
+      "description": "View table data",
+      "scope-references": ["$XSAPPNAME.Display"]
+    }
+  ]
+}

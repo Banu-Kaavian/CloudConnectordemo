@@ -1,42 +1,56 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ns.tableview.controller.View1">
-<VBox id="_IDGenVBox" class="sapUiSmallMargin">
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          controllerName="ns.tableview.controller.View1">
+    
+    <VBox id="_IDGenVBox" class="sapUiContentPadding sapUiSmallMargin sapUiSizeCompact">
+        
+        <!-- SAP Logo -->
+        <Image id="_IDGenImage" src="images/sap-logo.png"
+               width="150px"
+               height="auto"
+               alt="SAP Logo"
+               class="sapUiSmallMarginBottom" />
+        
+        <!-- Service Input & Preview Button -->
         <HBox id="_IDGenHBox" class="sapUiSmallMargin">
             <Input id="serviceInput" width="300px" placeholder="Enter Service Name..." />
-            <Button id="_IDGenButton1" text="Preview" press="onPreview" />
-        </HBox>
-    <VBox id="_IDGenVBox1" fitContainer="true" >
-     <!-- Filter Section -->
-
-        <HBox id="_IDGenHBox1" visible="true">
-            <Label id="_IDGenLabel" text="Filter by:" />
-
-          <Select id="filterColumnSelect" change="onColumnChange">
-            <!-- Options will be added dynamically -->
-          </Select>
-
-         <Input id="filterInput" placeholder="Enter filter value..." liveChange="onFilterData"/>
+            <Button id="_IDGenButton" text="Preview" press="onPreview" class="sapUiTinyMarginBegin" />
         </HBox>
 
-     <!-- Scrollable Container for Table -->
-     <ScrollContainer id="_IDGenScrollContainer1" width="100%" height="400px" horizontal="false" vertical="true">
-        <Table id="dataTable" width="100%" growing="true" growingThreshold="10" items="{viewModel>/results}">
+        <!-- Filter Section -->
+        <Toolbar id="_IDGenToolbar" class="sapUiTinyMarginBottom">
+    <Title id="_IDGenTitle" text="Choose Any Field For Filter" level="H3" />
+    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+    <Select id="filterColumnSelect" change="onColumnChange" width="200px" />
+    <Input id="filterInput" placeholder="Enter value..." liveChange="onFilterData" width="250px" />
+</Toolbar>
 
-            <columns>
-                <!-- Columns will be dynamically added -->
-            </columns>
+        <!-- Panel with Table inside -->
+        <Panel id="_IDGenPanel1" headerText="Sales Document Entries"
+               expandable="false"
+               class="sapUiSmallMarginTop">
+            <ScrollContainer id="_IDGenScrollContainer" width="100%" height="400px"
+                             horizontal="false" vertical="true">
+                <Table id="dataTable"
+                       class="customTable"
+                       growing="true"
+                       growingScrollToLoad="true"
+                       autoPopinMode="true"
+                       items="{viewModel>/results}">
 
-            <items>
-                <ColumnListItem id="_IDGenColumnListItem">
-                    <cells>
-                        <!-- Cells will be dynamically added -->
-                    </cells>
-                </ColumnListItem>
-            </items>
+                    <columns>
+                        <!-- Columns dynamically added -->
+                    </columns>
 
-        </Table>
-
-     </ScrollContainer>
+                    <items>
+                        <ColumnListItem id="_IDGenColumnListItem">
+                            <cells>
+                                <!-- Cells dynamically added -->
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </ScrollContainer>
+        </Panel>
     </VBox>
-</VBox>
-
 </mvc:View>

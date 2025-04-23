@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "ns/tableview/model/models",
-    "sap/ui/dom/includeStylesheet" // ← Add this
-], (UIComponent, models, includeStylesheet) => {
+    "ns/tableview/model/models"
+], (UIComponent, models) => {
     "use strict";
 
     return UIComponent.extend("ns.tableview.Component", {
@@ -14,9 +13,6 @@ sap.ui.define([
         },
 
         init() {
-            // Load custom CSS
-            includeStylesheet("ns/tableview/css/style.css");
-
             // call the base component's init function
             UIComponent.prototype.init.apply(this, arguments);
 

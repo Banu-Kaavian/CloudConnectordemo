@@ -19,7 +19,7 @@ module.exports = cds.service.impl(async function () {
      this.on("READ", Services, async () => {
         try {
             const response = await axios.get(
-                "http://34.238.82.151:50000/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection?$format=json",
+                "http://54.211.56.24:50000/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/ServiceCollection?$format=json",
                 { auth }
             );
 
@@ -54,7 +54,7 @@ module.exports = cds.service.impl(async function () {
             //console.log("Extracted serviceName:", serviceName); // Debugging
     
             const response = await axios.get(
-                `http://34.238.82.151:50000/sap/opu/odata/sap/${serviceName}/$metadata`,
+                `http://54.211.56.24:50000/sap/opu/odata/sap/${serviceName}/$metadata`,
                 { auth }
             );
     
@@ -88,7 +88,7 @@ module.exports = cds.service.impl(async function () {
             }
     
             const response = await axios.get(
-                `http://34.238.82.151:50000/sap/opu/odata/sap/${serviceName}/${entityName}/`,
+                `http://54.211.56.24:50000/sap/opu/odata/sap/${serviceName}/${entityName}/`,
                 {
                     headers: { Accept: "application/json, application/xml" },
                     auth,

@@ -24,6 +24,18 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "tableview-display": {
+          "semanticObject": "tableview",
+          "action": "display",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -57,9 +69,7 @@
       "compact": true,
       "cozy": true
     },
-    
     "models": {
-      
       "": {
         "dataSource": "mainService",
         "preload": true,
@@ -110,6 +120,20 @@
       "type": "XML",
       "id": "App",
       "async": true
+    },
+    "config": {
+      "routerConfig": {
+        "localApi": {
+          "uri": "/odata/v4/catalog/"
+        },
+        "productionApi": {
+          "uri": "/odata/v4/catalog/"
+        }
+      }
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "capmapp.service"
   }
 }

@@ -1,0 +1,37 @@
+/* Apply styles to the whole table */
+.customTable {
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for table header */
+.customTable .sapMListTblHeader {
+    background-color: #0070f2 !important;
+    color: white !important;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Styling for table rows */
+.customTable .sapMListTblRow {
+    transition: background-color 0.3s;
+}
+
+/* Add hover effect on rows */
+.customTable .sapMListTblRow:hover {
+    background-color: #f5f5f5 !important;
+}
+
+/* Adjust cell padding for better readability */
+.customTable .sapMListTblCell {
+    padding: 12px;
+}
+
+/* Responsive table improvements */
+@media screen and (max-width: 768px) {
+    .customTable {
+        font-size: 14px;
+    }
+}
